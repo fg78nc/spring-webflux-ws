@@ -14,13 +14,13 @@ public class MessageRestController {
 
     @GetMapping(value = "/sse", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Publisher<Message> sseMessage () {
-        return Flux.<Message>generate(sink -> sink.next(new Message("Hello world @" + Instant.now().toString())))
+        return Flux.<Message>generate(sink -> sink.next(new Message("Message @" + Instant.now().toString())))
         .delayElements(Duration.ofSeconds(1));
     }
 
-    @GetMapping("/greetings")
+    @GetMapping("/message")
     Publisher<Message> messagePublisher() {
-        return Flux.<Message>generate(sink -> sink.next(new Message("Hello, world"))).take(1000);
+        return Flux.<Message>generate(sink -> sink.next(new Message("Message"))).take(1000);
     }
 }
 
